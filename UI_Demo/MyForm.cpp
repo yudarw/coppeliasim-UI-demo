@@ -2,11 +2,9 @@
 #include "include/coppeliasim.h"
 #include <iostream>
 
-
 using namespace System;
 using namespace System::Windows::Forms;
 using namespace UI_Demo;
-
 using namespace std;
 
 CoppeliaSim mSim;
@@ -15,8 +13,10 @@ CoppeliaRobot mRobot;
 float posData[6];
 int mode = 0;
 
+// Prototype Function
 void thread_read_data(void*);
 
+// Initialization program
 void MyForm::on_init() {
 	// Initialize timer:
 	timer1->Interval = 50;
@@ -26,6 +26,7 @@ void MyForm::on_init() {
 	_beginthread(thread_read_data, 0, NULL);
 }
 
+// Thread for updating the data
 void thread_read_data(void*) {
 	while (true) {
 		if (mode == 0) {
@@ -38,8 +39,8 @@ void thread_read_data(void*) {
 	}
 }
 
+// Timer function: update the GUI information
 void MyForm::on_timer() {
-
 	update_pos_data();
 }
 
