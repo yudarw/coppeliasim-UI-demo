@@ -1,6 +1,7 @@
 #include "MyForm.h"
 #include "include/coppeliasim.h"
 #include <iostream>
+#include <windows.h>
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -12,6 +13,11 @@ CoppeliaRobot mRobot;
 
 float posData[6];
 int mode = 0;
+int step_index = 0;
+float pos_step_data[6] = { 1, 5, 10, 20, 50, 100};
+float ang_step_data[6] = { 0.5, 1, 2, 5, 10, 20};
+float pos_step = 10;
+float ang_step = 0;
 
 // Prototype Function
 void thread_read_data(void*);
@@ -24,6 +30,8 @@ void MyForm::on_init() {
 	cb_selectmode->SelectedIndex = mode;
 
 	_beginthread(thread_read_data, 0, NULL);
+
+	label_status->Text = "Initialize program";
 }
 
 // Thread for updating the data
@@ -42,6 +50,7 @@ void thread_read_data(void*) {
 // Timer function: update the GUI information
 void MyForm::on_timer() {
 	update_pos_data();
+
 }
 
 void MyForm::btn_connect() {
@@ -109,6 +118,8 @@ void MyForm::change_label() {
 		btn_rz_min->Text = "J6-";
 		btn_rz_plus->Text = "J6+";
 	}
+
+	update_set_data();
 }
 
 void MyForm::update_pos_data() {
@@ -118,6 +129,22 @@ void MyForm::update_pos_data() {
 	tb_pos_rx->Text = posData[3].ToString("N3");
 	tb_pos_ry->Text = posData[4].ToString("N3");
 	tb_pos_rz->Text = posData[5].ToString("N3");
+}
+
+void MyForm::update_set_data() {
+	float pos[6];
+	if (mode == 0) {
+		mRobot.readPosition(pos);
+	}
+	else {
+		mRobot.readCurrentJointPos(pos);
+	}
+	tb_set_x->Text = pos[0].ToString("N3");
+	tb_set_y->Text = pos[1].ToString("N3");
+	tb_set_z->Text = pos[2].ToString("N3");
+	tb_set_rx->Text = pos[3].ToString("N3");
+	tb_set_ry->Text = pos[4].ToString("N3");
+	tb_set_rz->Text = pos[5].ToString("N3");
 }
 
 void MyForm::btn_get_position() {
@@ -148,3 +175,76 @@ void MyForm::btn_set_position() {
 	}
 }
 
+void MyForm::movement_control(int id) {
+	if (mode == 0) {
+		float pos[6];
+		mRobot.readPosition(pos);
+
+		// x
+		if (id == 1) pos[0] -= pos_step;
+		else if (id == 2) pos[0] += pos_step;
+		// y
+		else if (id == 3) pos[1] -= pos_step;
+		else if (id == 4) pos[1] += pos_step;
+		// z
+		else if (id == 5) pos[2] -= pos_step;
+		else if (id == 6) pos[2] += pos_step;
+		// w
+		else if (id == 7) pos[3] -= ang_step;
+		else if (id == 8) pos[3] += ang_step;
+		// p
+		else if (id == 9) pos[4] -= ang_step;
+		else if (id == 10) pos[4] += ang_step;
+		// r
+		else if (id == 11) pos[5] -= ang_step;
+		else if (id == 12) pos[5] += ang_step;
+
+		mRobot.setPosition(pos, false);
+	}
+	else {
+		float pos[6];
+		mRobot.readCurrentJointPos(pos);
+
+		// x
+		if (id == 1) pos[0] -= ang_step;
+		else if (id == 2) pos[0] += ang_step;
+		// y
+		else if (id == 3) pos[1] -= ang_step;
+		else if (id == 4) pos[1] += ang_step;
+		// z
+		else if (id == 5) pos[2] -= ang_step;
+		else if (id == 6) pos[2] += ang_step;
+		// w
+		else if (id == 7) pos[3] -= ang_step;
+		else if (id == 8) pos[3] += ang_step;
+		// p
+		else if (id == 9) pos[4] -= ang_step;
+		else if (id == 10) pos[4] += ang_step;
+		// r
+		else if (id == 11) pos[5] -= ang_step;
+		else if (id == 12) pos[5] += ang_step;
+
+		mRobot.setJointPosition(pos, false);
+	}
+}
+
+
+void MyForm::step_decrease() {
+	char str[128];
+	step_index--;
+	if (step_index < 0) step_index = 0;
+	pos_step = pos_step_data[step_index];
+	ang_step = ang_step_data[step_index];
+	sprintf(str,"Movement step = %.1f, %.1f", pos_step, ang_step);
+	label_status->Text = gcnew String(str);
+}
+
+void MyForm::step_increase() {
+	char str[128];
+	step_index++;
+	if (step_index > 5) step_index = 5;
+	pos_step = pos_step_data[step_index];
+	ang_step = ang_step_data[step_index];
+	sprintf(str,"Movement step = %.1f, %.1f", pos_step, ang_step);
+	label_status->Text = gcnew String(str);
+}
