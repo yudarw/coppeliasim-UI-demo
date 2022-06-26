@@ -36,6 +36,7 @@ namespace UI_Demo {
 		void movement_control(int id);
 		void step_increase();
 		void step_decrease();
+		void show_teaching_form();
 
 	protected:
 		/// <summary>
@@ -107,6 +108,9 @@ namespace UI_Demo {
 	private: System::Windows::Forms::Button^  button7;
 	private: System::Windows::Forms::Button^  button8;
 	private: System::Windows::Forms::Button^  button9;
+	private: System::Windows::Forms::MenuStrip^  menuStrip1;
+	private: System::Windows::Forms::ToolStripMenuItem^  fileToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  teachingToolStripMenuItem;
 	private: System::ComponentModel::IContainer^  components;
 
 	protected:
@@ -180,10 +184,14 @@ namespace UI_Demo {
 			this->tb_set_rz = (gcnew System::Windows::Forms::TextBox());
 			this->tb_set_ry = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->teachingToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->groupBox4->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->groupBox3->SuspendLayout();
+			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// btn_x_plus
@@ -314,7 +322,7 @@ namespace UI_Demo {
 			this->groupBox4->Controls->Add(this->btn_z_plus);
 			this->groupBox4->Controls->Add(this->btn_rx_plus);
 			this->groupBox4->Controls->Add(this->btn_rx_min);
-			this->groupBox4->Location = System::Drawing::Point(12, 147);
+			this->groupBox4->Location = System::Drawing::Point(11, 175);
 			this->groupBox4->Name = L"groupBox4";
 			this->groupBox4->Size = System::Drawing::Size(296, 208);
 			this->groupBox4->TabIndex = 39;
@@ -539,7 +547,7 @@ namespace UI_Demo {
 			// statusStrip1
 			// 
 			this->statusStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->label_status });
-			this->statusStrip1->Location = System::Drawing::Point(0, 625);
+			this->statusStrip1->Location = System::Drawing::Point(0, 652);
 			this->statusStrip1->Name = L"statusStrip1";
 			this->statusStrip1->Size = System::Drawing::Size(319, 22);
 			this->statusStrip1->TabIndex = 43;
@@ -555,7 +563,7 @@ namespace UI_Demo {
 			// 
 			this->button1->BackColor = System::Drawing::Color::Teal;
 			this->button1->ForeColor = System::Drawing::Color::White;
-			this->button1->Location = System::Drawing::Point(31, 555);
+			this->button1->Location = System::Drawing::Point(30, 583);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(80, 60);
 			this->button1->TabIndex = 0;
@@ -568,7 +576,7 @@ namespace UI_Demo {
 			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
 				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->button2->ForeColor = System::Drawing::Color::White;
-			this->button2->Location = System::Drawing::Point(117, 555);
+			this->button2->Location = System::Drawing::Point(116, 583);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(80, 60);
 			this->button2->TabIndex = 3;
@@ -581,7 +589,7 @@ namespace UI_Demo {
 			this->button3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->button3->ForeColor = System::Drawing::Color::White;
-			this->button3->Location = System::Drawing::Point(203, 555);
+			this->button3->Location = System::Drawing::Point(202, 583);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(80, 60);
 			this->button3->TabIndex = 4;
@@ -624,7 +632,7 @@ namespace UI_Demo {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(75, 9);
+			this->label1->Location = System::Drawing::Point(65, 34);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(73, 13);
 			this->label1->TabIndex = 37;
@@ -632,7 +640,7 @@ namespace UI_Demo {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(154, 6);
+			this->textBox1->Location = System::Drawing::Point(153, 34);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(131, 20);
 			this->textBox1->TabIndex = 36;
@@ -758,7 +766,7 @@ namespace UI_Demo {
 			this->groupBox2->Controls->Add(this->tb_set_z);
 			this->groupBox2->Controls->Add(this->label4);
 			this->groupBox2->Controls->Add(this->tb_set_rx);
-			this->groupBox2->Location = System::Drawing::Point(11, 361);
+			this->groupBox2->Location = System::Drawing::Point(10, 389);
 			this->groupBox2->Name = L"groupBox2";
 			this->groupBox2->Size = System::Drawing::Size(296, 188);
 			this->groupBox2->TabIndex = 38;
@@ -797,24 +805,50 @@ namespace UI_Demo {
 			this->groupBox3->Controls->Add(this->label_rx);
 			this->groupBox3->Controls->Add(this->label_rz);
 			this->groupBox3->Controls->Add(this->tb_pos_x);
-			this->groupBox3->Location = System::Drawing::Point(12, 32);
+			this->groupBox3->Location = System::Drawing::Point(11, 60);
 			this->groupBox3->Name = L"groupBox3";
 			this->groupBox3->Size = System::Drawing::Size(296, 109);
 			this->groupBox3->TabIndex = 44;
 			this->groupBox3->TabStop = false;
 			this->groupBox3->Text = L"Current Position";
 			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->fileToolStripMenuItem,
+					this->teachingToolStripMenuItem
+			});
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(319, 24);
+			this->menuStrip1->TabIndex = 45;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// fileToolStripMenuItem
+			// 
+			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
+			this->fileToolStripMenuItem->Size = System::Drawing::Size(37, 20);
+			this->fileToolStripMenuItem->Text = L"File";
+			// 
+			// teachingToolStripMenuItem
+			// 
+			this->teachingToolStripMenuItem->Name = L"teachingToolStripMenuItem";
+			this->teachingToolStripMenuItem->Size = System::Drawing::Size(66, 20);
+			this->teachingToolStripMenuItem->Text = L"Teaching";
+			this->teachingToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::teachingToolStripMenuItem_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(319, 647);
+			this->ClientSize = System::Drawing::Size(319, 674);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->groupBox3);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->groupBox4);
 			this->Controls->Add(this->statusStrip1);
+			this->Controls->Add(this->menuStrip1);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->groupBox2);
@@ -829,6 +863,8 @@ namespace UI_Demo {
 			this->groupBox2->PerformLayout();
 			this->groupBox3->ResumeLayout(false);
 			this->groupBox3->PerformLayout();
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -911,6 +947,9 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 }
 private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
 	step_increase();
+}
+private: System::Void teachingToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	show_teaching_form();
 }
 };
 }

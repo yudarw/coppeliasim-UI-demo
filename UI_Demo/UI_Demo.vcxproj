@@ -138,6 +138,7 @@
     <ClCompile Include="include\extApiPlatform.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="TeachingForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\coppeliasim.h" />
@@ -147,10 +148,17 @@
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="TeachingForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="variables.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeachingForm.resx">
+      <DependentUpon>TeachingForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,5 +1,7 @@
 #include "MyForm.h"
+#include "TeachingForm.h"
 #include "include/coppeliasim.h"
+#include "variables.h"
 #include <iostream>
 #include <windows.h>
 
@@ -247,4 +249,9 @@ void MyForm::step_increase() {
 	ang_step = ang_step_data[step_index];
 	sprintf(str,"Movement step = %.1f, %.1f", pos_step, ang_step);
 	label_status->Text = gcnew String(str);
+}
+
+void MyForm::show_teaching_form() {
+	TeachingForm ^ form = gcnew TeachingForm;
+	form->Show();
 }
